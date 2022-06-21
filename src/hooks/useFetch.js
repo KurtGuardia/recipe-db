@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react"
 
 export const useFetch = (url) => {
   const [data, setData] = useState(null)
@@ -10,12 +10,10 @@ export const useFetch = (url) => {
 
     const fetchData = async () => {
       setIsPending(true)
-
+      
       try {
-        const res = await fetch(url, {
-          signal: controller.signal,
-        })
-        if (!res.ok) {
+        const res = await fetch(url, { signal: controller.signal })
+        if(!res.ok) {
           throw new Error(res.statusText)
         }
         const data = await res.json()
@@ -24,8 +22,8 @@ export const useFetch = (url) => {
         setData(data)
         setError(null)
       } catch (err) {
-        if (err.name === 'AbortError') {
-          console.log('the fetch was aborted')
+        if (err.name === "AbortError") {
+          console.log("the fetch was aborted")
         } else {
           setIsPending(false)
           setError('Could not fetch the data')
@@ -38,6 +36,7 @@ export const useFetch = (url) => {
     return () => {
       controller.abort()
     }
+
   }, [url])
 
   return { data, isPending, error }
