@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useReducer } from 'react'
 import { ThemeContext } from '../context/ThemeContext'
 
 export const useTheme = () => {
